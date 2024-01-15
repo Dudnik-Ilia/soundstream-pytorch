@@ -1,5 +1,3 @@
-# Copyright (C) 2023 Katsuya Iida. All rights reserved.
-
 from typing import Tuple, List, Optional
 import torch
 import torch.nn as nn
@@ -512,11 +510,13 @@ class StreamableModel(pl.LightningModule):
 
         # train generator
         self.toggle_optimizer(optimizer_g)
+        # q_loss is a commitment loss
         output, _, q_loss = self.forward(input)
         # output: [batch, channel, sequence]
         # print(input.shape, output.shape)
 
         stft_out = self.stft_discriminator(output)
+        # hinge adversarial generator loss
         g_stft_loss = torch.mean(torch.relu(1 - stft_out))
         self.log("g_stft_loss", g_stft_loss)
 

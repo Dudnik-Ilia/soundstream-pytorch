@@ -1,4 +1,4 @@
-from soundstream import Encoder, Decoder, ResidualVectorQuantizer
+from soundstream_net import Encoder, Decoder, ResidualVectorQuantizer
 import torch
 import torch.nn as nn
 
